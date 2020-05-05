@@ -1,58 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchCity from './SearchCity';
-import device from '../responsive/Device';
-import Result from './Result';
-import NotFound from './NotFound';
+import SearchCity from './searchCity/SearchCity.jsx';
+import AppTitle from './appTitle/AppTitle.jsx';
+import Text from '../responsive.styles/Text.js';
+import LittelLabel from '../responsive.styles/LittelLabel.js';
+import NotFound from './notFound/NotFound.jsx';
+import device from '../responsive.styles/Device.js';
+import Result from './result/Result.jsx';
 
-const AppTitle = styled.h1`
-  display: block;
-  height: 64px;
-  margin: 0;
-  padding: 20px 0;
-  font-size: 20px;
-  text-transform: uppercase;
-  font-weight: 400;
-  color: #ffffff;
-  transition: 0.3s 1.4s;
-  opacity: ${({ showLabel }) => (showLabel ? 1 : 0)};
-
-  ${({ secondary }) =>
-    secondary &&
-    `
-    opacity: 1;
-    height: auto;
-    position: relative;
-    padding: 20px 0;
-    font-size: 30px;
-    top: 20%;
-    text-align: center;
-    transition: .5s;
-    @media ${device.tablet} {
-      font-size: 40px;
-    }
-    @media ${device.laptop} {
-      font-size: 50px;
-    }
-    @media ${device.laptopL} {
-      font-size: 60px;
-    }
-    @media ${device.desktop} {
-      font-size: 70px;
-    }
-    
-  `}
-
-  ${({ showResult }) =>
-    showResult &&
-    `
-    opacity: 0;
-    visibility: hidden;
-    top: 10%;
-  `}
-`;
-
-const WeatherWrapper = styled.div`
+const ContainerWrapper = styled.div`
   max-width: 1500px;
   margin: 0 auto;
   height: calc(100vh - 64px);
@@ -66,7 +22,6 @@ class App extends React.Component {
     weatherInfo: null,
     error: false,
   };
-
   handleInputChange = e => {
     this.setState({
       value: e.target.value,
@@ -76,9 +31,11 @@ class App extends React.Component {
   handleSearchCity = e => {
     e.preventDefault();
     const { value } = this.state;
+
     const APIkey = process.env.REACT_APP_API_KEY;
 
     const weather = `https://api.openweathermap.org/data/2.5/weather?q=${value}&APPID=${APIkey}&units=metric`;
+
     const forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${value}&APPID=${APIkey}&units=metric`;
 
     Promise.all([fetch(weather), fetch(forecast)])
@@ -107,7 +64,7 @@ class App extends React.Component {
         const currentDate = new Date();
         const date = `${days[currentDate.getDay()]} ${currentDate.getDate()} ${
           months[currentDate.getMonth()]
-        }`;
+        } `;
         const sunset = new Date(data1.sys.sunset * 1000).toLocaleTimeString().slice(0, 5);
         const sunrise = new Date(data1.sys.sunrise * 1000).toLocaleTimeString().slice(0, 5);
 
@@ -127,6 +84,7 @@ class App extends React.Component {
           wind: data1.wind.speed,
           forecast: data2.list,
         };
+
         this.setState({
           weatherInfo,
           error: false,
@@ -136,8 +94,8 @@ class App extends React.Component {
         console.log(error);
 
         this.setState({
-          error: true,
           weatherInfo: null,
+          error: true,
         });
       });
   };
@@ -145,22 +103,23 @@ class App extends React.Component {
   render() {
     const { value, weatherInfo, error } = this.state;
     return (
-      <>
+      <div>
         <AppTitle showLabel={(weatherInfo || error) && true}>Weather app</AppTitle>
-        <WeatherWrapper>
+        <ContainerWrapper>
           <AppTitle secondary showResult={(weatherInfo || error) && true}>
             Weather app
           </AppTitle>
           <SearchCity
             value={value}
             showResult={(weatherInfo || error) && true}
-            change={this.handleInputChange}
             submit={this.handleSearchCity}
+            change={this.handleInputChange}
           />
           {weatherInfo && <Result weather={weatherInfo} />}
+
           {error && <NotFound error={error} />}
-        </WeatherWrapper>
-      </>
+        </ContainerWrapper>
+      </div>
     );
   }
 }

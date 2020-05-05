@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import SmallLabel from './SmallLabel';
-import Text from './Text';
-import device from '../responsive/Device';
+import device from './Device.js';
+import Text from './Text.js';
+import LittelLabel from './LittelLabel.js';
 
 const ForecastWrapper = styled.div`
   flex-shrink: 0;
@@ -47,9 +47,9 @@ const ForecastHour = props => {
       </Text>
       <Text align="center">{hour}:00</Text>
       <WeatherIcon src={iconUrl} />
-      <SmallLabel align="center" weight="400">
+      <LittelLabel align="center" weight="400">
         {temp}&#176;
-      </SmallLabel>
+      </LittelLabel>
     </ForecastWrapper>
   );
 };

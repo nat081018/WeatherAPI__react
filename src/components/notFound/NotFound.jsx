@@ -1,8 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
+import device from '../../responsive.styles/Device.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import ResultFadeIn from './ResultFadeIn';
+import ResultFadeIn from '../../resultFadein.js';
 
 const NotFoundWrapper = styled.div`
   max-width: 600px;

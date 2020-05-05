@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import device from '../../responsive.styles/Device.js';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import device from '../responsive/Device';
 
-const SearchBar = styled.form`
+const SearchWrapper = styled.form`
   top: ${({ showResult }) => (showResult ? '0%' : '30%')};
   position: relative;
   margin: 0 auto;
@@ -14,6 +14,7 @@ const SearchBar = styled.form`
   @media ${device.laptopL} {
     max-width: 600px;
   }
+
   @media ${device.desktop} {
     max-width: 700px;
   }
@@ -65,24 +66,23 @@ const SearchIcon = styled.span`
   }
 `;
 
-const SearchCity = ({ submit, value, change, showResult }) => {
+const SearchCity = ({ showResult, submit, value, change }) => {
   return (
     <>
-      <SearchBar showResult={showResult} onSubmit={submit}>
+      <SearchWrapper showResult={showResult} onSubmit={submit}>
         <SearchInput type="text" value={value} placeholder="Enter city" onChange={change} />
         <SearchIcon>
           <FontAwesomeIcon icon={faSearch} />
         </SearchIcon>
-      </SearchBar>
+      </SearchWrapper>
     </>
   );
 };
 
 SearchCity.propTypes = {
+  showResult: PropTypes.bool.isRequired,
   submit: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   change: PropTypes.func.isRequired,
-  showResult: PropTypes.bool.isRequired,
 };
-
 export default SearchCity;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './Result.sass';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,13 +11,13 @@ import {
   faSmog,
 } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
-import device from '../responsive/Device';
-import ForecastHour from './ForecastHour';
-import ResultFadeIn from './ResultFadeIn';
-import BigLabel from './BigLabel';
-import MediumLabel from './MediumLabel';
-import SmallLabel from './SmallLabel';
-import Text from './Text';
+import device from '../../responsive.styles/Device.js';
+import ForecastHour from '../../responsive.styles/ForecastHour.js';
+import ResultFadeIn from '../../resultFadein.js';
+import BigLabel from '../../responsive.styles/BigLabel.js';
+import MediumLabel from '../../responsive.styles/MediumLabel.js';
+import LittelLabel from '../../responsive.styles/LittelLabel.js';
+import Text from '../../responsive.styles/Text.js';
 
 const Results = styled.div`
   display: flex;
@@ -184,52 +183,52 @@ const Result = ({ weather }) => {
         <BigLabel>
           {city}, {country}
         </BigLabel>
-        <SmallLabel weight="400">{date}</SmallLabel>
+        <LittelLabel weight="400">{date}</LittelLabel>
       </LocationWrapper>
       <CurrentWeatherWrapper>
         <WeatherIcon>{weatherIcon}</WeatherIcon>
         <TemperatureWrapper>
           <Temperature>{Math.floor(temp)}&#176;</Temperature>
-          <SmallLabel weight="400" firstToUpperCase>
+          <LittelLabel weight="400" firstToUpperCase>
             {description}
-          </SmallLabel>
+          </LittelLabel>
         </TemperatureWrapper>
       </CurrentWeatherWrapper>
       <WeatherDetailsWrapper>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {Math.floor(highestTemp)}&#176;
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Hight</Text>
         </WeatherDetail>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {wind}mph
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Wind</Text>
         </WeatherDetail>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {sunrise}
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Sunrise</Text>
         </WeatherDetail>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {Math.floor(lowestTemp)}&#176;
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Low</Text>
         </WeatherDetail>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {humidity}%
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Rain</Text>
         </WeatherDetail>
         <WeatherDetail>
-          <SmallLabel align="center" weight="400">
+          <LittelLabel align="center" weight="400">
             {sunset}
-          </SmallLabel>
+          </LittelLabel>
           <Text align="center">Sunset</Text>
         </WeatherDetail>
       </WeatherDetailsWrapper>
